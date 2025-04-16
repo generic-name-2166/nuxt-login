@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref } from "vue";
-/* import { useRouter } from "vue-router"; */
+import { useRouter } from "vue-router";
 
 const error = ref("");
-/* const router = useRouter(); */
+const router = useRouter();
 
 const login = async (event: Event) => {
   const form = event.target as HTMLFormElement;
@@ -21,8 +21,10 @@ const login = async (event: Event) => {
       },
     });
   } catch (e) {
-    error.value = "Invalid credentials";
+    error.value = "Введены неверные данные авторизации. \nПопробуйте ещё раз";
+    return;
   }
+  router.push("/account");
 };
 </script>
 
