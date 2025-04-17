@@ -8,7 +8,14 @@
 } */
 
 definePageMeta({
-  middleware: ["auth"],
+  middleware: [
+    (to, _from) => {
+      const authenticated = useCookie("token");
+      if (to.fullPath === "/account" && !authenticated.value) {
+        return navigateTo("/");
+      }
+    },
+  ],
 });
 
 const router = useRouter();
