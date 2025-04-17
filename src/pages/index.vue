@@ -20,7 +20,8 @@ const login = async (event: Event) => {
         password,
       },
     });
-    sessionStorage.setItem("token", token.token);
+    const cookie = useCookie("token");
+    cookie.value = token.token;
   } catch (e) {
     error.value = "Введены неверные данные авторизации. \nПопробуйте ещё раз";
     return;

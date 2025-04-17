@@ -7,12 +7,17 @@
   price: bigint;
 } */
 
-const { data } = await useFetch("/api/data");
+definePageMeta({
+  middleware: ["auth"],
+});
 
 const router = useRouter();
 
+const { data } = await useFetch("/api/data");
+
 const click = (): void => {
-  sessionStorage.removeItem("token");
+  const cookie = useCookie("token");
+  cookie.value = "";
   router.push("/");
 };
 </script>
