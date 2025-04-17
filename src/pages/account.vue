@@ -1,13 +1,19 @@
 <script setup lang="ts">
-import { useFetch } from "#app";
-
-const { data } = await useFetch("/api/account");
+const data: { data: string }[] = [];
 console.log(data);
+
+const router = useRouter();
+
+const click = (): void => {
+  sessionStorage.removeItem("token");
+  console.log("a");
+  router.push("/");
+}
 </script>
 
 <template>
   <div :class="$style.div">
-    <button type="button">Log out</button>
+    <button type="button" @click="click">Log out</button>
   </div>
 </template>
 
