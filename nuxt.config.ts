@@ -16,4 +16,5 @@ export default defineNuxtConfig({
     preset: "node_server",
   },
   /* modules: ["@pinia/nuxt"], */
+  modules: ["@nuxt/eslint"],
 });

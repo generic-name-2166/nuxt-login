@@ -3,7 +3,8 @@ export default defineEventHandler(async (event) => {
   // Replace with your own user validation logic
   if (username === "admin" && password === "password") {
     // Set session or return token as needed
-    return { success: true };
+    const token = "";
+    return { success: true, token };
   }
   throw createError({ statusCode: 401, statusMessage: "Invalid credentials" });
 });

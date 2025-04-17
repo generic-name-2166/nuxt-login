@@ -6,7 +6,9 @@ console.log(data);
 </script>
 
 <template>
-  <div :class="$style.div"></div>
+  <div :class="$style.div">
+    <button type="button">Log out</button>
+  </div>
 </template>
 
 <style lang="scss" module>

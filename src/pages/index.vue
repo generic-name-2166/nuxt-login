@@ -13,13 +13,14 @@ const login = async (event: Event) => {
 
   error.value = "";
   try {
-    await $fetch("/api/login", {
+    const token: { token: string } = await $fetch("/api/login", {
       method: "POST",
       body: {
         username,
         password,
       },
     });
+    sessionStorage.setItem("token", token.token);
   } catch (e) {
     error.value = "Введены неверные данные авторизации. \nПопробуйте ещё раз";
     return;
@@ -31,7 +32,7 @@ const login = async (event: Event) => {
 <template>
   <div :class="$style.div">
     <h2>Login</h2>
-    <form @submit.prevent="login" :class="$style.form">
+    <form :class="$style.form" @submit.prevent="login">
       <label for="username">Username</label>
       <input id="username" type="text" name="username" required />
 
