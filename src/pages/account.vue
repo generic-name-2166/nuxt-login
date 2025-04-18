@@ -37,11 +37,19 @@ interface FilterView {
 
 const filterObj = ref<FilterView>({ status: "", date_created: [], name: "" });
 
+const setStatus = (event: Event) => {
+  filterObj.value.status = (event.target as HTMLInputElement).value;
+};
+
 const setDate = (event: Event) => {
   const options = (event.target as HTMLSelectElement).selectedOptions;
   filterObj.value.date_created = Array.from(options).map((option) =>
     parseInt(option.value),
   );
+};
+
+const setName = (event: Event) => {
+  filterObj.value.name = (event.target as HTMLInputElement).value;
 };
 
 function filterView(data: Products, filterObj: FilterView): Product[] {
@@ -77,7 +85,11 @@ const view = computed(() => filterView(data, filterObj.value));
       <button type="button" @click="click">Log out</button>
     </header>
     <main :class="$style.main">
-      <div>
+      <div :class="$style.panel">
+        <div :class="$style.filter">
+          <label>Choose status</label>
+          <input @change="setStatus" />
+        </div>
         <div :class="$style.filter">
           <label>Choose dates</label>
           <select multiple size="5" @change="setDate">
@@ -89,6 +101,10 @@ const view = computed(() => filterView(data, filterObj.value));
               {{ date }}
             </option>
           </select>
+        </div>
+        <div :class="$style.filter">
+          <label>Choose name</label>
+          <input @change="setName" />
         </div>
       </div>
       <table :class="$style.table">
@@ -123,7 +139,14 @@ const view = computed(() => filterView(data, filterObj.value));
   justify-content: center;
 }
 
+.panel {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: row;
+}
+
 .filter {
+  padding: 1rem;
   display: flex;
   flex-direction: column;
 }
