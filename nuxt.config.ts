@@ -15,10 +15,5 @@ export default defineNuxtConfig({
   nitro: {
     preset: "node_server",
   },
-  vite: {
-    build: {
-      target: "nodenext",
-    },
-  },
   modules: ["@nuxt/eslint"],
 });
